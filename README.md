@@ -119,6 +119,29 @@ curl -X POST http://localhost:8000/auth/login \
   -d '{"email":"ali@example.com","password":"123456"}'
 ```
 
+### Media presign curl example
+
+Request a presigned URL:
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:8000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"ali@example.com","password":"123456"}' | jq -r .access_token)
+
+PRESIGN=$(curl -s -X POST http://localhost:8000/media/presign \
+  -H "Authorization: Bearer $TOKEN")
+
+MEDIA_KEY=$(echo $PRESIGN | jq -r .media_key)
+UPLOAD_URL=$(echo $PRESIGN | jq -r .upload_url)
+```
+
+Upload a file directly to MinIO using the presigned URL:
+
+```bash
+curl -X PUT "$UPLOAD_URL" --upload-file ./myimage.jpg
+echo $MEDIA_KEY
+```
+
 ## 2) Create the GitHub repository + push your local code
 
 ### A) Initialize git locally
