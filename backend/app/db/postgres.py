@@ -12,6 +12,7 @@ from sqlalchemy import (
     text,
 )
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import create_engine, text
 
 from app.core.config import get_settings
 
