@@ -52,36 +52,6 @@ Now copy your design doc into `docs/` (commit it so Codex can read it):
 docs/reddit_bigdata_design.docx
 ```
 
-## 1.1) Start infrastructure locally (docker compose)
-
-From repo root:
-
-```bash
-docker compose -f infra/docker-compose.yml up -d
-docker ps
-```
-
-To stop and remove containers:
-
-```bash
-docker compose -f infra/docker-compose.yml down
-```
-
-### Create the MinIO bucket named `media`
-
-Option A: via MinIO Console
-
-1. Open `http://localhost:9001`
-2. Log in with the credentials from `.env.example`
-3. Create a bucket named `media`
-
-Option B: via MinIO client (`mc`)
-
-```bash
-mc alias set local http://localhost:9000 minioadmin minioadmin
-mc mb local/media
-```
-
 ## 2) Create the GitHub repository + push your local code
 
 ### A) Initialize git locally
