@@ -142,6 +142,48 @@ curl -X PUT "$UPLOAD_URL" --upload-file ./myimage.jpg
 echo $MEDIA_KEY
 ```
 
+### Posts + comments curl examples
+
+Create a post (store only `media_key` values):
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:8000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"ali@example.com","password":"123456"}' | jq -r .access_token)
+
+curl -X POST http://localhost:8000/posts \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"title\":\"Hello\",\"body\":\"First post\",\"media_keys\":[\"$MEDIA_KEY\"]}"
+```
+
+List posts:
+
+```bash
+curl http://localhost:8000/posts
+```
+
+Get a post:
+
+```bash
+curl http://localhost:8000/posts/<POST_ID>
+```
+
+Create a comment:
+
+```bash
+curl -X POST http://localhost:8000/posts/<POST_ID>/comments \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"body":"Nice!"}'
+```
+
+List comments:
+
+```bash
+curl http://localhost:8000/posts/<POST_ID>/comments
+```
+
 ## 2) Create the GitHub repository + push your local code
 
 ### A) Initialize git locally
