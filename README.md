@@ -101,6 +101,24 @@ Health check:
 curl http://localhost:8000/health
 ```
 
+### Auth curl examples
+
+Register:
+
+```bash
+curl -X POST http://localhost:8000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"ali","email":"ali@example.com","password":"123456"}'
+```
+
+Login:
+
+```bash
+curl -X POST http://localhost:8000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"ali@example.com","password":"123456"}'
+```
+
 ## 2) Create the GitHub repository + push your local code
 
 ### A) Initialize git locally

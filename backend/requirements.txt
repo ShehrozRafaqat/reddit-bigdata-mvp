@@ -5,3 +5,6 @@ psycopg2-binary
 pymongo
 boto3
 python-dotenv
+python-jose[cryptography]
+passlib[bcrypt]
+email-validator
